@@ -6,28 +6,23 @@ import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
 
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import {MatCardModule} from '@angular/material/card';
+import {BrowserAnimationsModule}                                                               from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {MatCardModule}                                                                         from '@angular/material/card';
 
-import {WebService}       from './services/web.service';
-import {HttpClient}       from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
+import {WebService}            from './services/web.service';
+import {HttpClient}            from '@angular/common/http';
+import {HttpClientModule}      from '@angular/common/http';
+import { NewMessageComponent } from './new-message/new-message.component';
+import {FormsModule}           from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    NewMessageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatCardModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, MatCardModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatIconModule, FormsModule],
   providers: [
     WebService,
     HttpClient
