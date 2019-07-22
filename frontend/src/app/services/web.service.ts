@@ -12,16 +12,16 @@ export class WebService {
 
   messages: any = [];
 
-  async getMessages() {
-    try {
-      const response = await this.http.get(this.BASE_URL + 'messages').toPromise();
-      this.messages = response;
-    } catch (error) {
-      this.handleErrors('Get message error - Unable to return messages, Error! ', error);
-
-    }
+  getMessages(user?) {
+      user = (user) ? '/' + user : '';
+      this.http.get(this.BASE_URL + 'messages' + user).subscribe( response => {
+        this.messages = response;
+      }, error => {
+        this.handleErrors('Get message error - Unable to return messages, Error! ', error);
+      });  // promise doesnt return no longer have to await
+      console.log('After filtering :', this.messages);
   }
-  // TODO wtf :)
+
   async postMessage(message) {
     try {
       const response =  await this.http.post(this.BASE_URL + 'messages', message).toPromise();
