@@ -10,13 +10,14 @@ messages = [
 ];
 
 app.use(bodyParser.json()); // lets express know what we receive in our body should be in json
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-var api = express.Router()
+const api = express.Router();
 
 // app.get('/messages', (request, response) => {
 // //     response.json(messages);    //displayed on the page
@@ -37,7 +38,8 @@ api.get('/messages', (request, response) => {
 api.post('/messages', (request, response) => {
     console.log(request.body);
     messages.push(request.body);
-    response.sendStatus(200);       //sent to client
+    response.json(request.body);
+    // response.sendStatus(200);       //sent to client
 })
 
 app.use('/api', api);
