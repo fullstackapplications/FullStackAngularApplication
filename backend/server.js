@@ -32,18 +32,29 @@ const api = express.Router();
 
 api.get('/messages', (request, response) => {
     response.json(messages);    //displayed on the page
-    console.log("Someone connected to messages page!");
+    console.log("Messages was accessed!");
 })
+
+api.get('/messages/:user', (request, response) => {
+    const user = request.params.user;
+    console.log('This is the user: ', user);
+    const results = messages.filter( message => {
+       return message.owner == user;
+    });
+    // response.json(messages);    //displayed on the page
+    response.json(results);    //displayed on the page
+    console.log("Messages was filtered and accessed!", results);
+});
 
 api.post('/messages', (request, response) => {
     console.log(request.body);
     messages.push(request.body);
     response.json(request.body);
     // response.sendStatus(200);       //sent to client
-})
+});
 
 app.use('/api', api);
 
 app.listen( port , () => {
     console.log(`Listening on port ${port}!`);
-})
+});
