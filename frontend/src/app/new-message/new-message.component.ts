@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 // tslint:disable-next-line:import-spacing
-import {WebService}          from '../services/web.service';
+import {WebService}                              from '../services/web.service';
 
 @Component({
   selector: 'app-new-message',
@@ -8,6 +8,8 @@ import {WebService}          from '../services/web.service';
   styleUrls: ['./new-message.component.css']
 })
 export class NewMessageComponent implements OnInit {
+
+  // @Output() onPosted = new EventEmitter();
 
   constructor( private webService: WebService) { }
 
@@ -17,9 +19,10 @@ export class NewMessageComponent implements OnInit {
     text: '',
   };
 
-  post() {
-
-    console.log(this.message);
+  async post() {
+    await this.webService.postMessage(this.message);
+    // this.onPosted.emit(this.message);
+    console.log('What we are trying to send to the api', this.message);
   }
 
   ngOnInit() {
