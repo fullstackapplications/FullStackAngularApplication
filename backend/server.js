@@ -32,7 +32,7 @@ const api = express.Router();
 
 api.get('/messages', (request, response) => {
     response.json(messages);    //displayed on the page
-    console.log("Messages was accessed!");
+    console.log("Someone connected to messages page!");
 })
 
 api.post('/messages', (request, response) => {
