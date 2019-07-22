@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {MessagesComponent}    from './messages/messages.component';
+// import {MessagesComponent}    from './messages/messages.component';
 
 @Component({
   selector: 'app-root',
