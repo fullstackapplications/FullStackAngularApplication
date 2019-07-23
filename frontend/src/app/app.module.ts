@@ -17,13 +17,14 @@ import {
 }                                from '@angular/material';
 import {MatCardModule}           from '@angular/material/card';
 
-import {WebService}            from './services/web.service';
-import {HttpClient}            from '@angular/common/http';
-import {HttpClientModule}      from '@angular/common/http';
-import { NewMessageComponent } from './new-message/new-message.component';
-import {FormsModule}           from '@angular/forms';
-import { NavComponent }        from './nav/nav.component';
-import { HomeComponent } from './home/home.component';
+import {WebService}                       from './services/web.service';
+import {HttpClient}                       from '@angular/common/http';
+import {HttpClientModule}                 from '@angular/common/http';
+import { NewMessageComponent }            from './new-message/new-message.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NavComponent }                   from './nav/nav.component';
+import { HomeComponent }                  from './home/home.component';
+import { RegisterComponent }              from './register/register.component';
 
 const routes = [];
 
@@ -33,9 +34,10 @@ const routes = [];
     MessagesComponent,
     NewMessageComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, MatCardModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, MatSnackBarModule, MatToolbarModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, MatCardModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, MatSnackBarModule, MatToolbarModule, ReactiveFormsModule],
   providers: [
     WebService,
     HttpClient,

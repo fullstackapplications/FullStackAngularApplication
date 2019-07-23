@@ -1,0 +1,42 @@
+<mat-card>
+  <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input style="width: 350px" matInput placeholder="First name" formControlName="firstName">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input style="width: 350px" matInput placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input style="width: 350px" matInput placeholder="Email" type="email" formControlName="email">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input style="width: 350px" matInput placeholder="Password" type="password" formControlName="password">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input style="width: 350px" matInput placeholder="Confirm Password" type="password" formControlName="confirmpassword">
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <button mat-raised-button color="primary">Register</button>
+  </form>
+</mat-card>

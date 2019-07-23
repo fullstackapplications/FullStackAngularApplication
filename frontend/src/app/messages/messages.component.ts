@@ -10,11 +10,18 @@ import {ActivatedRoute}      from '@angular/router';
 })
 export class MessagesComponent implements OnInit {
 
+  // messages;
+
   constructor( private webService: WebService,
                private  route: ActivatedRoute) { }
 
+
+  // anything loaded using messages, reloads with filter
   ngOnInit() {
     const name =  this.route.snapshot.params.name;
     this.webService.getMessages(name);
+    // this.webService.messages.subscribe( messages => {
+    //   this.messages = messages;
+    // });
   }
 }
