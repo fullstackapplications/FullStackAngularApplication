@@ -1,5 +1,8 @@
 <mat-toolbar color="primary">
   <button mat-raised-button color="primary" routerLink="/">Message Board</button>
   <button mat-raised-button color="primary" routerLink="/messages">Messages</button>
+  <span style="flex: 1 1 auto">
+  </span>
   <button mat-raised-button color="primary" routerLink="/register">Register</button>
+  <button *ngIf="auth.isAuthenticated" mat-raised-button color="primary" routerLink="/register">Welcome {{auth.name}}</button>
 </mat-toolbar>
