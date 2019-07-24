@@ -22,6 +22,12 @@ export class AuthService {
     return localStorage.getItem(this.NAME_KEY);
   }
 
+  logout() {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.NAME_KEY);
+
+  }
+
   register(user) {
     delete user.confirmPassword;
     this.http.post(this.BASE_URL + 'register', user).subscribe( response => {
@@ -37,5 +43,9 @@ export class AuthService {
 
       this.router.navigate(['/']);
     });
+  }
+
+  login(loginData) {
+
   }
 }

@@ -25,6 +25,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavComponent }                   from './nav/nav.component';
 import { HomeComponent }                  from './home/home.component';
 import { RegisterComponent }              from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes = [];
 
@@ -35,7 +36,8 @@ const routes = [];
     NewMessageComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, MatCardModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, MatSnackBarModule, MatToolbarModule, ReactiveFormsModule],
   providers: [
