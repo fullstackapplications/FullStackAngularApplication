@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser'); //middle ware to read body sent
 const app = express();
+const bodyParser = require('body-parser'); //middle ware to read body sent
 
 const port = 63145;
 
@@ -9,8 +9,9 @@ messages = [
     {text: 'other text', owner: 'Jane'}
 ];
 
-app.use(bodyParser.json()); // lets express know what we receive in our body should be in json
+users = [];
 
+app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -18,6 +19,12 @@ app.use(function(req, res, next) {
 });
 
 const api = express.Router();
+const auth = express.Router();
+
+
+
+
+
 
 // app.get('/messages', (request, response) => {
 // //     response.json(messages);    //displayed on the page
@@ -37,7 +44,7 @@ api.get('/messages', (request, response) => {
 
 api.get('/messages/:user', (request, response) => {
     const user = request.params.user;
-    console.log('This is the user: ', user);
+    console.log('User we are filtering by: ', user);
     const results = messages.filter( message => {
        return message.owner == user;
     });
@@ -53,7 +60,16 @@ api.post('/messages', (request, response) => {
     // response.sendStatus(200);       //sent to client
 });
 
+
+auth.post('/register', (request, response) => {
+    console.log(request.body);
+    // console.log('Register Accessed!', response.body);
+    users.push(request.body);
+    response.json(request.body);
+});
+
 app.use('/api', api);
+app.use('/auth', auth);
 
 app.listen( port , () => {
     console.log(`Listening on port ${port}!`);
