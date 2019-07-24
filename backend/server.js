@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser'); //middle ware to read body sent
+const jwt = require('jsonwebtoken');
 
 const port = 63145;
 
@@ -62,10 +63,14 @@ api.post('/messages', (request, response) => {
 
 
 auth.post('/register', (request, response) => {
+    const index = users.push(request.body) - 1;
+    const user = users[index];
+    user.id = index;
+    const token = jwt.sign(user.id, '123');
     console.log(request.body);
     // console.log('Register Accessed!', response.body);
-    users.push(request.body);
-    response.json(request.body);
+
+    response.json(token);
 });
 
 app.use('/api', api);
