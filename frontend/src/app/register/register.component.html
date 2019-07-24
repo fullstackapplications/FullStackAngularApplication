@@ -21,6 +21,7 @@
             <input style="width: 350px" matInput placeholder="Email" type="email" formControlName="email">
           </mat-form-field>
         </td>
+        <span *ngIf="form.errors?.invalidEmail">Passwords do not match!</span>
       </tr>
       <tr>
         <td>
@@ -32,8 +33,10 @@
       <tr>
         <td>
           <mat-form-field class="example-full-width">
-            <input style="width: 350px" matInput placeholder="Confirm Password" type="password" formControlName="confirmpassword">
+            <input style="width: 350px" matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword">
           </mat-form-field>
+          <br />
+          <span *ngIf="form.errors?.missMatched">Passwords do not match!</span>
         </td>
       </tr>
     </table>
