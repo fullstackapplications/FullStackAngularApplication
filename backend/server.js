@@ -66,7 +66,8 @@ auth.post('/register', (request, response) => {
     const index = users.push(request.body) - 1;
     const user = users[index];
     user.id = index;
-    const token = jwt.sign(user.id, '123');
+    // const token = jwt.sign(user.id, '123');
+    const token = {'token': jwt.sign(user.id, '123')};      // course suddenly decides to change response
     console.log(request.body);
     // console.log('Register Accessed!', response.body);
 
