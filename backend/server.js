@@ -10,12 +10,13 @@ messages = [
     {text: 'other text', owner: 'Jane'}
 ];
 
-users = [];
+users = [{firstName: "Test", email: "test@test.com", password: 'test', id: 0}];
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+
     next();
 });
 
@@ -61,21 +62,88 @@ api.post('/messages', (request, response) => {
     // response.sendStatus(200);       //sent to client
 });
 
+api.get('/users/me'), checkAuthenticated, (req, res) => {
+
+    console.log('Do we get here!?!?');
+    console.log('User Id: ', req.user);
+    res.body('Hello world!');
+};
 
 auth.post('/register', (request, response) => {
     const index = users.push(request.body) - 1;
     const user = users[index];
     user.id = index;
+    // const token = jwt.sign(user.id, '123');
+    // // const token = {'token': jwt.sign(user.id, '123')};      // course suddenly decides to change response
+    // console.log(request.body);
+    // // console.log('Register Accessed!', response.body);
+    //
+    // response.json({
+    //     firstName: user.firstName,
+    //     token,
+    // });
+
+    sendToken(user, response);
+});
+
+auth.post('/login', (request, response) => {
+    let user = users.find(  user => {
+        return user.email === request.body.email;
+    });
+
+    if(!user) {
+        // console.log('This is the user info we received: ', user);
+        sendAuthError(response);
+    }
+
+    if(user.password == request.body.password) {
+        sendToken(user, response);
+    }
+    else {
+        sendAuthError(response);
+    }
+});
+
+function sendToken(user, response) {
+
     const token = jwt.sign(user.id, '123');
     // const token = {'token': jwt.sign(user.id, '123')};      // course suddenly decides to change response
-    console.log(request.body);
+    // console.log(request.body);
     // console.log('Register Accessed!', response.body);
 
     response.json({
         firstName: user.firstName,
         token,
     });
-});
+
+}
+
+function sendAuthError(response) {
+    return response.json({
+        success: false,
+        message: 'email or password incorrect!'
+    })
+}
+
+function checkAuthenticated( req, res, next) {
+    if(!req.header('authorization')) {
+        console.log("Missing header?");
+        return res.status(401).send({message: '************ Error Missing Header !'});
+    }
+
+    let token = req.header('authorization').split(' ')[1];
+
+    let payload = jwt.decode(token, '123');
+
+    if(!payload) {
+        console.log("Missing request?");
+        return res.status(401).send({message: '!!!!!!!!!!!! Error Missing request !'});
+    }
+
+    req.user = payload;
+
+    next();
+}
 
 app.use('/api', api);
 app.use('/auth', auth);
