@@ -23,7 +23,8 @@ app.use(function(req, res, next) {
 const api = express.Router();
 const auth = express.Router();
 
-
+app.use('/api', api);
+app.use('/auth', auth);
 
 
 
@@ -62,12 +63,22 @@ api.post('/messages', (request, response) => {
     // response.sendStatus(200);       //sent to client
 });
 
-api.get('/users/me'), checkAuthenticated, (req, res) => {
 
-    console.log('Do we get here!?!?');
+api.get('/users/me', checkAuthenticated, (req, res) => {
+
     console.log('User Id: ', req.user);
-    res.body('Hello world!');
-};
+    res.json(users[req.user]);
+});
+
+api.post('/users/me', checkAuthenticated, (req, res) => {
+
+    const user = users[req.user];
+
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+
+    res.json(user);
+});
 
 auth.post('/register', (request, response) => {
     const index = users.push(request.body) - 1;
@@ -126,9 +137,9 @@ function sendAuthError(response) {
 }
 
 function checkAuthenticated( req, res, next) {
-    if(!req.header('authorization')) {
+    if(!req.header('Authorization')) {
         console.log("Missing header?");
-        return res.status(401).send({message: '************ Error Missing Header !'});
+        return res.status(401).send({message: '************ Error Missing authentication Header !'});
     }
 
     let token = req.header('authorization').split(' ')[1];
@@ -144,9 +155,6 @@ function checkAuthenticated( req, res, next) {
 
     next();
 }
-
-app.use('/api', api);
-app.use('/auth', auth);
 
 app.listen( port , () => {
     console.log(`Listening on port ${port}!`);
