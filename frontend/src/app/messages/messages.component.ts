@@ -23,5 +23,6 @@ export class MessagesComponent implements OnInit {
     // this.webService.messages.subscribe( messages => {
     //   this.messages = messages;
     // });
+    this.webService.getUser().subscribe();
   }
 }

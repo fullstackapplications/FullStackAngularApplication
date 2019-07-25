@@ -3,6 +3,7 @@ import { Injectable }  from '@angular/core';
 import {HttpClient}    from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import {Subject}       from 'rxjs';
+import {AuthService}   from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -40,8 +41,17 @@ export class WebService {
   }
 
 
+  getUser() {
+    return this.http.get(this.BASE_URL + 'users/me', this.auth.tokenHeader);
+  }
+
+  saveUser() {
+    return this.http.get(this.BASE_URL + 'users/me', this.auth.tokenHeader);
+  }
+
   // runs every time service is imported/accesses/used
-  constructor(private http: HttpClient, private sb: MatSnackBar) {
+  constructor(private http: HttpClient, private sb: MatSnackBar,
+              private auth: AuthService) {
     this.getMessages();
   }
 
