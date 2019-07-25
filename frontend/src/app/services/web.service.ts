@@ -45,8 +45,8 @@ export class WebService {
     return this.http.get(this.BASE_URL + 'users/me', this.auth.tokenHeader);
   }
 
-  saveUser() {
-    return this.http.get(this.BASE_URL + 'users/me', this.auth.tokenHeader);
+  saveUser(userData) {
+    return this.http.post(this.BASE_URL + 'users/me', userData, this.auth.tokenHeader);
   }
 
   // runs every time service is imported/accesses/used

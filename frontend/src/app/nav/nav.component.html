@@ -3,8 +3,9 @@
   <button mat-raised-button color="primary" routerLink="/messages">Messages</button>
   <span style="flex: 1 1 auto">
   </span>
-  <button *ngIf="!auth.isAuthenticated"mat-raised-button color="primary" routerLink="/login">Login</button>
-  <button *ngIf="!auth.isAuthenticated"mat-raised-button color="primary" routerLink="/register">Register</button>
-  <button *ngIf="auth.isAuthenticated" mat-raised-button color="primary" routerLink="/">Welcome {{auth.name}}</button>
+  <button *ngIf="!auth.isAuthenticated" mat-raised-button color="primary" routerLink="/login">Login</button>
+  <button *ngIf="!auth.isAuthenticated" mat-raised-button color="primary" routerLink="/register">Register</button>
+  <button mat-raised-button color="primary" routerLink="/user">User</button>
+  <button *ngIf="auth.isAuthenticated" mat-raised-button color="primary" routerLink="/user">Welcome {{auth.name}}</button>
   <button *ngIf="auth.isAuthenticated" mat-raised-button color="primary" (click)="auth.logout()">Logout</button>
 </mat-toolbar>
