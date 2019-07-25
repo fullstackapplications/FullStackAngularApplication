@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WebService}          from '../services/web.service';
+import {AuthService}         from '../services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -8,11 +9,12 @@ import {WebService}          from '../services/web.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor( private webService: WebService) { }
+  constructor( private webService: WebService,
+               private auth: AuthService) { }
 
 
   model = {
-    firstName: 'test',
+    firstName: this.auth.name,
     lastName: '',
   };
 
